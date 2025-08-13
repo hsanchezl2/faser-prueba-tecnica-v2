@@ -4,10 +4,11 @@ import { CommonModule } from '@angular/common';
 import { AddTaskDialogComponent } from './components/add-task-dialog/add-task-dialog.component';
 import { Task } from './models/task.model';
 import { ModifyTaskDialogComponent } from './components/modify-task-dialog/modify-task-dialog.component';
+import { CargaMasivaDialogComponent } from './components/carga-masiva-dialog/carga-masiva-dialog.component';
 
 @Component({
   selector: 'app-root',
-  imports: [CommonModule, AddTaskDialogComponent, ModifyTaskDialogComponent],
+  imports: [CommonModule, AddTaskDialogComponent, ModifyTaskDialogComponent, CargaMasivaDialogComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -16,10 +17,15 @@ export class AppComponent {
   tasks: Task[] = [];
   showDialog = false;
   showDialogModify = false;
+  showDialogCargaMasiva = false;
   selectedTask: Task | null = null;
 
   addTask() {
     this.showDialog = true;
+  }
+
+  addCargaMasiva() {
+    this.showDialogCargaMasiva = true;
   }
 
   onTaskAdded(newTask: Task) {
@@ -44,6 +50,7 @@ export class AppComponent {
   onDialogClosed() {
     this.showDialog = false;
     this.showDialogModify = false;
+    this.showDialogCargaMasiva = false;
   }
 
   selectTask(task: Task) {

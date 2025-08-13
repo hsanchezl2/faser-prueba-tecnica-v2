@@ -5,6 +5,10 @@
       <span class="icon">+</span>
       Agregar Tarea
     </button>
+    <button class="btn btn-primary" (click)="addCargaMasiva()">
+      <span class="icon">+</span>
+      Carga masiva
+    </button>
   </header>
 
   <main class="main-content">
@@ -15,7 +19,6 @@
             <th>ID</th>
             <th>Título</th>
             <th>Duración (minutos)</th>
-            <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
@@ -28,15 +31,6 @@
             <td>{{ task.id }}</td>
             <td>{{ task.title }}</td>
             <td>{{ task.duration }}</td>
-            <td>
-              <button 
-                class="btn btn-danger btn-sm" 
-                (click)="deleteTask(); $event.stopPropagation()"
-                [disabled]="!isTaskSelected(task)"
-              >
-                Eliminar
-              </button>
-            </td>
           </tr>
         </tbody>
       </table>
@@ -76,3 +70,9 @@
   (dialogClosed)="onDialogClosed()"
   [task]="selectedTask"
 ></app-modify-task-dialog>
+
+<app-carga-masiva-dialog 
+  *ngIf="showDialogCargaMasiva"
+  (taskAdded)="onTaskAdded($event)"
+  (dialogClosed)="onDialogClosed()"
+></app-carga-masiva-dialog>
