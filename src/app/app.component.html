@@ -50,7 +50,7 @@
       </ng-template>
     </div>
 
-    <div class="info-panel" *ngIf="selectedTask">
+    <!-- <div class="info-panel" *ngIf="selectedTask">
       <h3>Tarea Seleccionada</h3>
       <div class="task-info">
         <p><strong>ID:</strong> {{ selectedTask.id }}</p>
@@ -60,7 +60,7 @@
       <button class="btn btn-danger" (click)="deleteTask()">
         Eliminar Tarea Seleccionada
       </button>
-    </div>
+    </div> -->
   </main>
 </div>
 
@@ -69,3 +69,10 @@
   (taskAdded)="onTaskAdded($event)"
   (dialogClosed)="onDialogClosed()"
 ></app-add-task-dialog>
+
+<app-modify-task-dialog 
+  *ngIf="showDialogModify"
+  (taskAdded)="onUpdateTaskAdded($event)"
+  (dialogClosed)="onDialogClosed()"
+  [task]="selectedTask"
+></app-modify-task-dialog>
