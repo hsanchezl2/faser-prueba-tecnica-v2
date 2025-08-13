@@ -43,7 +43,7 @@ import { Task } from '../../models/task.model';
           
           <div class="dialog-actions">
             <button type="button" class="btn btn-secondary" (click)="close()">Cancelar</button>
-            <button type="submit" class="btn btn-primary" [disabled]="taskForm.invalid">Agregar</button>
+            <button type="submit" class="btn btn-primary" [disabled]="taskForm.invalid">Modificar</button>
             <button type="button" class="btn btn-danger" (click)="Eliminar()">Eliminar</button> <!--Se agrega nuevo boton para eliminar la tarea seleccionada-->
           </div>
         </form>
@@ -164,7 +164,6 @@ export class ModifyTaskDialogComponent {
   taskForm: FormGroup;
   
   constructor(private fb: FormBuilder) {
-    console.error("Mostrando data de modificar");
     this.taskForm = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(1)]],
       duration: ['', [Validators.required, Validators.min(1)]]
@@ -172,7 +171,6 @@ export class ModifyTaskDialogComponent {
   }
   
   verificarData(){
-    console.error("Mostrando la tarea: ",this.task)
   }
 
   onSubmit() {

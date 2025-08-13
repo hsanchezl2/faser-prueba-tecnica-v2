@@ -26,7 +26,6 @@ import { Task } from '../../models/task.model';
           <div class="dialog-actions">
             <button type="button" class="btn btn-secondary" (click)="close()">Cancelar</button>
             <button type="button" class="btn btn-secondary" (click)="obtenerValor()">Agregar</button>
-            <button type="button" class="btn btn-secondary" >Obtener del servidor</button>
           </div>
         </form>
       </div>
@@ -173,7 +172,7 @@ export class CargaMasivaDialogComponent {
       : 10;                       // Si no hay segunda parte, usa 10
 
     return {
-      id: Date.now() + Math.random(),
+      id: Math.floor(Date.now() + Math.random() * 10000),
       title,
       duration
     };

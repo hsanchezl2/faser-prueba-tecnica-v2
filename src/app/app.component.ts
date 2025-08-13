@@ -5,6 +5,7 @@ import { AddTaskDialogComponent } from './components/add-task-dialog/add-task-di
 import { Task } from './models/task.model';
 import { ModifyTaskDialogComponent } from './components/modify-task-dialog/modify-task-dialog.component';
 import { CargaMasivaDialogComponent } from './components/carga-masiva-dialog/carga-masiva-dialog.component';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +14,9 @@ import { CargaMasivaDialogComponent } from './components/carga-masiva-dialog/car
   styleUrl: './app.component.css'
 })
 export class AppComponent {
+
+ constructor(private http: HttpClient) {}
+
   title = 'Control de Tareas - Hogla Sanchez';  // Cambio del titulo del control de tareas para reconocer al postulante
   tasks: Task[] = [];
   showDialog = false;
@@ -68,4 +72,27 @@ export class AppComponent {
   isTaskSelected(task: Task): boolean {
     return this.selectedTask?.id === task.id;
   }
+
+  obtenerDelServidor() {
+    this.http.get<any[]>('https://jsonplaceholder.typicode.com/todos')
+      .subscribe({
+        next: (data) => {
+          const seleccionadas: Task[] = [...data]
+            .sort(() => Math.random() - 0.5) // Mezclar aleatoriamente
+            .slice(0, 5) // Tomar 5
+            .map(item => ({
+              id: Math.floor(Date.now() + Math.random() * 10000),
+              title: item.title,
+              duration: item.userId
+            }));
+
+          this.tasks.push(...seleccionadas);
+        },
+        error: (err) => {
+          console.error('Error al obtener tareas del servidor:', err);
+          alert('No se pudieron obtener las tareas. Intente de nuevo más tarde.');
+        }
+      });
+  }
+
 }
